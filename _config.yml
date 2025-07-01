@@ -20,7 +20,7 @@ rtl                      : # true, false (default) # turns direction of the page
 title                    : "블로그는 아니고 그냥 그런거"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "blottingitup 🐉💎"
+name                     : "blottingitup"
 description              : "공부한 거 적당히 정리합니다."
 url                      : "https://blottingitup.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -113,7 +113,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "blottingitup 🐉💎"
+  name             : "blottingitup"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "공부한 거 적당히 정리합니다."
   location         : "Somewhere, South Korea"
