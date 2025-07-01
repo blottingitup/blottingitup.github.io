@@ -287,9 +287,11 @@ whitelist:
 category_archive:
   type: liquid
   path: /categories/
+  author_profile: true
 tag_archive:
   type: liquid
   path: /tags/
+  author_profile: true
 # https://github.com/jekyll/jekyll-archives
 # jekyll-archives:
 #   enabled:
