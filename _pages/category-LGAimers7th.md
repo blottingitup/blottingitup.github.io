@@ -1,5 +1,5 @@
 ---
-title: "LGAimers7th"
+title: "LG Aimers 7th"
 layout: archive
 permalink: /LGAimers7th
 ---
