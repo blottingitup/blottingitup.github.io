@@ -13,5 +13,7 @@ main:
 sidebar-category:
   - title: "Category"
     children:
-      - title: "LG Aimers 7기"
+      - title: "LG Aimers 7th"
         url:  "/LGAimers7th"
+      - title: "Introduction to Robotics"
+        url: "/IntRobotics"
