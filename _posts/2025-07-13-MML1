@@ -1,0 +1,14 @@
+---
+layout: single
+title:  "Mathematics for ML(1)"
+categories:
+  - LGAimers7th
+---
+
+# Review on matrix decomposition
+
+### Determinant, Invertibility and Trace
+The determinant of a square matrix $A \in \mathbb{R}^n \times n$ is a function that maps $A$ onto a real number.
+
+det(A) = |A| = 
+
