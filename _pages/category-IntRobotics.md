@@ -1,5 +1,5 @@
 ---
-title: "IntRobotics"
+title: "Introduction to Robotics"
 layout: archive
 permalink: /IntRobotics
 ---
