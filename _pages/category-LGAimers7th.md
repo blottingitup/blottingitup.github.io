@@ -2,6 +2,8 @@
 title: "LG Aimers 7th"
 layout: archive
 permalink: /LGAimers7th
+author_profile: true
+sidebar_main: true
 ---
 
 
