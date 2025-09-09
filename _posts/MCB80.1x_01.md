@@ -1,0 +1,65 @@
+---
+layout: single
+title:  "[REview] MCB80.1x.01 - "
+categories:
+  - MCB80
+---
+
+We need to know about some electronic terms to understand bioelectricity, 
+which plays a central role in the function of the nervous system.
+Voltage can be said to be the difference in electrical potential between two points.
+Most of us already know its SI unit, volts(**V**), 
+as there are so many places and things around us that use electricity.
+
+One simple thing we need to know:  
+Positive(**+**) charges will move towards lower electrical potential, 
+while negative(**-**) charges will move towards higher electrical potential.
+
+(전하 이동하는 사진)
+
+Ions, which are positively or negatively charged, make the potential difference between the inside and the outside of the cell.
+Ions can only move in and out of the cell with the help of channels or pumps in the membrane.
+The impermeability of the membrane helps maintain the voltage across the membrane.
+
+(세포막에 채널, 이온 있는 사진)
+
+Voltage is a relative measurement.
+We mostly use the  as the reference point, but in neuroscience we use the outside of the cell as the 'ground'.
+For example, if the inside of the cell is 15mV more positive than the outside of the cell, 
+the voltage can be said as +15mV.
+
+(예시 사진 있으먄)
+
+The typical neuron
+Soma: houses the cell's neucleus and a variety of cellular machinery
+axons, dendrites
+cell membrane: the outer surface of all these parts is made up of a bilayer of lipid molecules that partition the inside and outsied
+
+we will focus on some small part of the soma from now on
+we can measure the membrane potential, and this can vary very widely.
+even at rest, the membrane potential is not zero; the resting potential is measured around -60~-70mV
+There are many many kinds of materials floating around the water covering both the inside and outside of the cell
+There are about four important things to concentrate on: K+, Na+, Ca2+, Cl-
+
+(전위차 사진)
+(이온 분포 표?사진?)
+
+We know about electrostatic force: same charges repel each other, while different charges attract each other
+that is the basic concept
+WE need to know about diffusion, which can be easily witnessed as colors spreading through water 
+when we drop some dye into it
+Diffusion is a stochastic process, a random walk of particles bumping into each other.
+But as we can easily derive from the example above, diffusion causes the particles to move from regions
+of high concentration to lower ones
+
+Electrostatic force, and diffusion both perform in the movement of ions surrounding the membrane
+Let's just think about one kind of ion, potassium first
+We have said above that the ions can only move in and out of the membrane via channels 
+that allow only specific substances to flow.
+------------------------------
+For example, if the concentration of K+ is higher on the inside and the K+ channel is open,
+K+ will start to diffuse from inside to the outside of the neuron.
+And then, because each side of the membrane is basically electroneutral at the start,
+
+We can think at first that in the end, the K+ concentration on both sides will become the same at equilibrium
+But here's the catch: 
