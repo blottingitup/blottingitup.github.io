@@ -13,6 +13,8 @@ main:
 sidebar-category:
   - title: "Category"
     children:
+      - title: "CS231n"
+        url: "/CS231n"
       - title: "LG Aimers 7th"
         url:  "/LGAimers7th"
       - title: "Introduction to Robotics"
