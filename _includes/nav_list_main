@@ -35,8 +35,8 @@
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Robotics" %}
-                        <li><a href="/categories/Robotics" class="">Introduction to Robotics ({{category[1].size}})</a></li>
+                    {% if category[0] == "IntroRobotics" %}
+                        <li><a href="/categories/IntroRobotics" class="">Introduction to Robotics ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>            
