@@ -12,22 +12,22 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
-title                    : "블로그는 아니고 그냥 그런거"
+title                    : "a bloglike something"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "blottingitup"
-description              : "공부한 거 적당히 정리합니다."
+description              : "studying..."
 url                      : "https://blottingitup.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
-masthead_title           : "블로그는 아니고 그냥 그런거" # overrides the website title displayed in the masthead, use " " for no title
+masthead_title           : "a bloglike something" # overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200
 enable_copy_code_button  : # true, false (default)
@@ -115,8 +115,8 @@ analytics:
 author:
   name             : "blottingitup"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "공부한 거 적당히 정리합니다."
-  location         : "Somewhere, South Korea"
+  bio              : "just studying..."
+  location         : "???"
   email            :
   links:
     - label: "Email"
@@ -320,7 +320,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      read_time: true
+      read_time: false
       comments: # true
       share: # true
       related: # true
