@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Robotics"
 layout: archive
-permalink: /IntRobotics
+permalink: /IntroRobotics
 author_profile: true
 sidebar_main: true
 ---
