@@ -1,7 +1,7 @@
 ---
 title: "Fundamentals of Neuroscience"
 layout: archive
-permalink: /NeuroScience
+permalink: categories/NeuroScience
 author_profile: true
 sidebar_main: true
 ---
