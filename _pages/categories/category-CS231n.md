@@ -1,7 +1,7 @@
 ---
 title: "CS231n"
 layout: archive
-permalink: /CS231n
+permalink: categories/CS231n
 author_profile: true
 sidebar_main: true
 ---
