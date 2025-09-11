@@ -2,7 +2,7 @@
 layout: single
 title:  "[REview] MCB80.1x.01 - "
 categories:
-  - MCB80
+  - FundNeuro
 ---
 
 We need to know about some electronic terms to understand bioelectricity, 
