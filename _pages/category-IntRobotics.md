@@ -5,7 +5,6 @@ permalink: /IntRobotics
 author_profile: true
 sidebar_main: true
 ---
-// int
 
 {% assign posts = site.categories.IntRobotics %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
