@@ -1,11 +1,11 @@
 ---
-title: "MCB80"
+title: "Fundamentals of Neuroscience"
 layout: archive
-permalink: /MCB80
+permalink: /FundNeuro
 author_profile: true
 sidebar_main: true
 ---
 
 
-{% assign posts = site.categories.MCB80 %}
+{% assign posts = site.categories.FundNeuro %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
