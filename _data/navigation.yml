@@ -10,14 +10,8 @@ main:
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
-sidebar-category:
-  - title: "Category"
-    children:
-      - title: "CS231n"
-        url: "/CS231n"
-      - title: "MCB80"
-        url: "/MCB80"
-      - title: "LG Aimers 7th"
-        url:  "/LGAimers7th"
-      - title: "Introduction to Robotics"
-        url: "/IntRobotics"
+#sidebar-category:
+  #- title: "Category"
+    #children:
+      #- title: "CS231n"
+        #url: "/CS231n"
