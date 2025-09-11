@@ -12,8 +12,7 @@ sidebar_main: true
 
 
 <div class="archive__container">
-  {% assign posts = site.categories.LGAimers7th %}
-  {% for post in posts %}
+  {% for post in site.categories.LGAimers7th %}
     {% include archive-single2.html %}
   {% endfor %}
 </div>
