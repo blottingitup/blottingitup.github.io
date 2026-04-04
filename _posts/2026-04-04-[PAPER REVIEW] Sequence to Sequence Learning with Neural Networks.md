@@ -99,8 +99,8 @@ h_t &= o_t \odot \tanh(C_t)
 \end{aligned}
 $$
 
-Lastly, the combination of the forget gate with the cell state of previous time and the input gate with the candidate key is stored in the current cell state. It means we discard unneeded information from the previous long-term memory, and add new information to complete the current long-term memory which will be sent on to the next cell.  
-We've forgotten something, the current hidden state. The "output gate" is calculated in the same manner as the forget gate and input gate. And we apply the $\tanh$ function to the cell state, and multiplying it element-wise to the output gate returns the value of the current hidden state. We do not want the short-term memory, the hidden state to be contaminated by the cell state. So we carefully choose the information to be the short-term memory, which acts on nearby cells.  
+Lastly, the combination of the forget gate with the cell state of previous time and the input gate with the candidate key is stored in the current cell state. It means we discard unneeded information from the previous long-term memory, and add new information to complete the current long-term memory which will be sent on to the next cell.
+We've forgotten something, the current hidden state. The "output gate" is calculated in the same manner as the forget gate and input gate. And we apply the $\tanh$ function to the cell state, and multiplying it element-wise to the output gate returns the value of the current hidden state. We do not want the short-term memory, the hidden state to be contaminated by the cell state. So we carefully choose the information to be the short-term memory, which acts on nearby cells.
 But why the $\tanh$ function in the output gate? The reason for $\tanh$ functions is that we don't want the data values to grow too much. We use addition to update the cell state in contrast to the RNN, which used multiplication. The cell state will be kept added as time goes, and the unbounded values might cause some unwanted results. Specifically, the values being introduced in the gates will have very big absolute values. And these values go through the sigmoid function, and are saturated to regions where the gradient becomes infinitesimally small, finally resulting in gradient vanishing.
 
 $$
@@ -110,7 +110,7 @@ $$
 \end{aligned}
 $$
 
-We now come back to the core part. What have we done to reduce gradient vanishing or exploding? We've already gone through the answer; the result to the gradient of the cell state doesn't have anything like the multiplication of weight matrices, which were the main culprit to the vanishing gradient problem. We can use the values preserved in long-term memory. The gradient of the hidden state uses the gradient of the cell state, which we can easily notice, instead of going back to calculate the gradient of hidden state far away.  
+We now come back to the core part. What have we done to reduce gradient vanishing or exploding? We've already gone through the answer; the result to the gradient of the cell state doesn't have anything like the multiplication of weight matrices, which were the main culprit to the vanishing gradient problem. We can use the values preserved in long-term memory. The gradient of the hidden state uses the gradient of the cell state, which we can easily notice, instead of going back to calculate the gradient of hidden state far away.
 But unfortunately, we have only solved half of the problem. Exploding gradient still exists, if we can't get hold of the additive terms and if we have a very long sequence to process. So something called gradient norm clipping flies in to save the day.
 
 $$
