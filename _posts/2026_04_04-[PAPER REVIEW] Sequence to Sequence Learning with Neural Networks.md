@@ -4,7 +4,7 @@ categories:
   - PAPER
 ---
 
-**Deep Neural Networks (DNNs)** have shown its flexibility and power through achieving excellent performance on problems such as speech recognition and visual object recognition. But there is the limitation that it cannot be applied to problems that use sequences whose lengths are not known a-priori. To solve sequence problems, this paper presents the way of using **Long Short-Term Memory (LSTM)** architecture. One for reading the input, and the other for extracting the output based on the input sequence.  
+**Deep Neural Networks (DNNs)** have shown their flexibility and power through achieving excellent performance on problems such as speech recognition and visual object recognition. However, they have a limitaion: they cannot be applied to problems that use sequences whose lengths are not known a-priori. To solve sequence problems, this paper presents the way of using **Long Short-Term Memory (LSTM)** architecture. It consists of two components: one for reading the input, and the other for extracting the output based on the input sequence.  
 [fig1]  
 
 Before reading on, we need some background on the **Recurrent Neural Network (RNN)** and LSTM. Let's look first at the RNN.  
@@ -20,7 +20,7 @@ y_t &= W^{yh}h_t + b_y
 \end{aligned}
 $$
 
-First, we calculate the hidden state using the input sequence. The result of the linear combination of the input and the hidden state from the previous iteration, plus some bias is pushed into the sigmoid function to complete the current hidden state. Then the current hidden state, again with some bias, is used to retrieve some output.  
+First, we calculate the hidden state using the input sequence. The result of the linear combination of the input and the hidden state from the previous iteration, plus some bias is passed into the sigmoid function to complete the current hidden state. Then the current hidden state, again with some bias, is used to retrieve some output.  
 [fig3]  
 
 Like we see, many forms can be induced from the original structure. And different forms are used to solve different problems.  
@@ -72,7 +72,7 @@ Apart from the high learning cost due to the sequentiality of the network, vanis
 
 ### 2. LSTM
 [fig5]  
-Now it's the LSTM, which has three "gates" which uses something called a "cell state" which is a sort of long-term memory. In contrast, the hidden state can be said to be short-term memory. The cell state and hidden state are both propagated to the next cell.
+Now it's the LSTM, which has three "gates" which uses something called a "cell state" which is a sort of long-term memory. In contrast, the hidden state can be said to be short-term memory. The cell state and hidden state are both propagated to the next cell. We do some extra calculations before obtaining $\hat{y}_t$.
 
 $$
 \begin{aligned}
@@ -80,7 +80,7 @@ f_t &= \sigma(W_f \cdot \left[h_{t-1}, \text{ } x_t\right] + b_f)
 \end{aligned}
 $$
 
-The "forget gate" uses the sigmoid function to become a kind of bias choosing which information to discard.  
+The "forget gate" uses the sigmoid function to become a kind of mask choosing which information to discard. Take care not to get confused with the dimension: $W_f \cdot \left[h_{t-1}, \text{ } x_t\right] = W_{h}h_{t-1} + W_{x}x_t$.  
 
 $$
 \begin{aligned}
@@ -89,7 +89,7 @@ i_t &= \sigma(W_i \cdot \left[h_{t-1}, \text{ } x_t\right] + b_i) \\\\
 \end{aligned}
 $$
 
-The "input gate" is a kind of bias that decides what information to store. The input gate has a similar form to the forget gate; they both act as some kind of bias. Meanwhile, the $\tanh$ layer gives zero-centered values to choose the information to be stored, and how. The result of this $\tanh$ layer $\tilde{C}_t$, is called "candidate value".  
+The "input gate" is a kind of mask that decides what information to store. The input gate has a similar form to the forget gate; they both act the same way. Meanwhile, the $\tanh$ layer gives zero-centered values to choose the information to be stored, and how. The result of this $\tanh$ layer $\tilde{C}_t$, is called "candidate value".  
 
 $$
 \begin{aligned}
@@ -100,13 +100,13 @@ h_t &= o_t \odot \tanh(C_t)
 $$
 
 Lastly, the combination of the forget gate with the cell state of previous time and the input gate with the candidate key is stored in the current cell state. It means we discard unneeded information from the previous long-term memory, and add new information to complete the current long-term memory which will be sent on to the next cell.  
-We've forgotten something, the current hidden state. The "output gate" is calculated in the same manner as the forget gate and input gate. And we apply the $\tanh$ function to the cell state, and adding it to the output gate returns the value of the current hidden state. We do not want the short-term memory, the hidden state to be contaminated by the cell state. So we carefully choose the information to be the short-term memory, which acts on nearby cells.  
-But why the $\tanh$ function in the output gate? The reason for $\tanh$ functions is that we don't want the data values to grow too much. We use addition to update parameters in contrast to the RNN, which used multiplication. The cell state will be kept added as time goes, and the unbounded values might cause some unwanted results. Specifically, the values being introduced in the gates will have very big absolute values. And these values go through the sigmoid function, and are saturated to regions where the gradient becomes infinitesimally small, finally resulting in gradient vanishing.
+We've forgotten something, the current hidden state. The "output gate" is calculated in the same manner as the forget gate and input gate. And we apply the $\tanh$ function to the cell state, and multiplying it element-wise to the output gate returns the value of the current hidden state. We do not want the short-term memory, the hidden state to be contaminated by the cell state. So we carefully choose the information to be the short-term memory, which acts on nearby cells.  
+But why the $\tanh$ function in the output gate? The reason for $\tanh$ functions is that we don't want the data values to grow too much. We use addition to update the cell state in contrast to the RNN, which used multiplication. The cell state will be kept added as time goes, and the unbounded values might cause some unwanted results. Specifically, the values being introduced in the gates will have very big absolute values. And these values go through the sigmoid function, and are saturated to regions where the gradient becomes infinitesimally small, finally resulting in gradient vanishing.
 
 $$
 \begin{aligned}
 \frac{\partial L}{\partial C_t} &= \frac{\partial L}{\partial h_t} \frac{\partial h_t}{\partial C_t} + \frac{\partial L}{\partial C_{t+1}} \frac{\partial C_{t+1}}{\partial C_t} = \left(\frac{\partial L}{\partial h_t} \odot o_t \odot sech^2(C_t) \right) + \left(\frac{\partial L}{\partial C_{t+1}} \odot f_{t+1}\right)  \\\\
-\frac{\partial L}{\partial h_{t-1}} &= \frac{\partial L}{\partial f_t} \frac{\partial f_t}{\partial h_{t-1}} + \frac{\partial L}{\partial i_t} \frac{\partial i_t}{\partial h_{t-1}} + \frac{\partial L}{\partial \tilde{C}_t} \frac{\partial \tilde{C}_t}{\partial h_{t-1}} + \frac{\partial L}{\partial o_t} \frac{\partial o_t}{\partial h_{t-1}}
+\frac{\partial L}{\partial h_{t-1}} &= \frac{\partial L}{\partial \hat{y}_t} \frac{\partial \hat{y}_t}{\partial h_{t-1}} + \frac{\partial L}{\partial f_t} \frac{\partial f_t}{\partial h_{t-1}} + \frac{\partial L}{\partial i_t} \frac{\partial i_t}{\partial h_{t-1}} + \frac{\partial L}{\partial \tilde{C}_t} \frac{\partial \tilde{C}_t}{\partial h_{t-1}} + \frac{\partial L}{\partial o_t} \frac{\partial o_t}{\partial h_{t-1}}
 \end{aligned}
 $$
 
