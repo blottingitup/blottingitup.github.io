@@ -5,12 +5,12 @@ categories:
 ---
 
 **Deep Neural Networks (DNNs)** have shown their flexibility and power through achieving excellent performance on problems such as speech recognition and visual object recognition. However, they have a limitaion: they cannot be applied to problems that use sequences whose lengths are not known a-priori. To solve sequence problems, this paper presents the way of using **Long Short-Term Memory (LSTM)** architecture. It consists of two components: one for reading the input, and the other for extracting the output based on the input sequence.  
-[fig1]  
+![Fig01: Simple Seq2Seq]({{site.baseurl}}/assets/images/260404_Fig01.jpg)  
 
 Before reading on, we need some background on the **Recurrent Neural Network (RNN)** and LSTM. Let's look first at the RNN.  
 
 ### 1. RNN
-[fig2]  
+![Fig02: RNN]({{site.baseurl}}/assets/images/260404_Fig02.png)  
 The RNN computes a sequence of output $(y_1, y_2, \dots, y_T)$s given a sequence of inputs $(x_1, x_2, \dots, x_T)$ by the following iteration.
 
 $$
@@ -21,7 +21,7 @@ y_t &= W^{yh}h_t + b_y
 $$
 
 First, we calculate the hidden state using the input sequence. The result of the linear combination of the input and the hidden state from the previous iteration, plus some bias is passed into the sigmoid function to complete the current hidden state. Then the current hidden state, again with some bias, is used to retrieve some output.  
-[fig3]  
+![Fig03: Many kinds of RNNs]({{site.baseurl}}/assets/images/260404_Fig03.png)  
 
 Like we see, many forms can be induced from the original structure. And different forms are used to solve different problems.
 And what about learning? We use backpropagation, specially called **Backpropagation Through Time (BPTT)**, named because of the fact that errors are propagated backwards allowing the network to learn dependencies over time.
@@ -71,7 +71,7 @@ $$
 Apart from the high learning cost due to the sequentiality of the network, vanishing and exploding gradient problems are key problems with RNNs. And these problems inflict damage upon the network by backpropagating improper gradient. Thus the network cannot "remember" information from distant nodes, acting as if the network has short-term memory. Although we can try to solve these problems by changing some functions ($tanh$ is more often used as the sigmoid function), it still doesn't fix the root cause.  
 
 ### 2. LSTM
-[fig5]  
+![Fig05: LSTM]({{site.baseurl}}/assets/images/260404_Fig05.png)  
 Now it's the LSTM, which has three "gates" which uses something called a "cell state" which is a sort of long-term memory. In contrast, the hidden state can be said to be short-term memory. The cell state and hidden state are both propagated to the next cell. We do some extra calculations before obtaining $\hat{y}_t$.
 
 $$
