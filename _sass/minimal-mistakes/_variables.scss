@@ -6,13 +6,13 @@
    Typography
    ========================================================================== */
 
-$doc-font-size: 14px !default;  // default 16px
+$doc-font-size: 14px;  // default 16px
 $doc-font-size-medium: $doc-font-size * 1.125 !default;
 $doc-font-size-large: $doc-font-size * 1.25 !default;
 $doc-font-size-x-large: $doc-font-size * 1.375 !default;
 
 /* paragraph indention */
-$paragraph-indent: false !default; // true, false (default)
+$paragraph-indent: true; // true, false (default)
 $indent-var: 1.3em !default;
 
 /* Modern font stack */
