@@ -23,7 +23,7 @@ $$
 First, we calculate the hidden state using the input sequence. The result of the linear combination of the input and the hidden state from the previous iteration, plus some bias is passed into the sigmoid function to complete the current hidden state. Then the current hidden state, again with some bias, is used to retrieve some output.  
 [fig3]  
 
-Like we see, many forms can be induced from the original structure. And different forms are used to solve different problems.  
+Like we see, many forms can be induced from the original structure. And different forms are used to solve different problems.
 And what about learning? We use backpropagation, specially called **Backpropagation Through Time (BPTT)**, named because of the fact that errors are propagated backwards allowing the network to learn dependencies over time.
 Let's say we have the activation function $\sigma$, use softmax function for the output and use the cross-entropy loss for the output answer $y_t$ as the loss function. And we'll change the terminology a little bit.
 
