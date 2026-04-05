@@ -4,7 +4,7 @@ categories:
   - PAPER
 ---
 
-**Deep Neural Networks (DNNs)** have shown their flexibility and power through achieving excellent performance on problems such as speech recognition and visual object recognition. However, they have a limitaion: they cannot be applied to problems that use sequences whose lengths are not known a-priori. To solve sequence problems, this paper presents the way of using **Long Short-Term Memory (LSTM)** architecture. It consists of two components: one for reading the input, and the other for extracting the output based on the input sequence.  
+**Deep Neural Networks (DNNs)** have shown their flexibility and power through achieving excellent performance on problems such as speech recognition and visual object recognition. However, they have a limitation: they cannot be applied to problems that use sequences whose lengths are not known a-priori. To solve sequence problems, *Sequence to Sequence Learning with Neural Networks*(Sutskever et al., 2014) presents the way of using **Long Short-Term Memory (LSTM)** architecture. It consists of two components: one for reading the input, and the other for extracting the output based on the input sequence.  
 ![Fig01: Simple Seq2Seq]({{site.baseurl}}/assets/images/260404_Fig01.jpg)  
 
 Before reading on, we need some background on the **Recurrent Neural Network (RNN)** and LSTM. Let's look first at the RNN.  
@@ -45,7 +45,7 @@ $$
 \end{aligned}
 $$
 
-But things get a little trickier. Say $h_t = \sigma(z_t)$, having $z_t = \sigma(W^{hx}x_t + W^{hh}h_{t-1} + b_h)$. We want the gradients $\frac{\partial L}{\partial b_h}$, $\frac{\partial L}{\partial W^{hx}}$ and $\frac{\partial L}{\partial W^{hh}}$.
+But things get a little trickier. Say $h_t = \sigma(z_t)$, having $z_t = W^{hx}x_t + W^{hh}h_{t-1} + b_h$. We want the gradients $\frac{\partial L}{\partial b_h}$, $\frac{\partial L}{\partial W^{hx}}$ and $\frac{\partial L}{\partial W^{hh}}$.
 
 $$
 \begin{aligned}
@@ -56,7 +56,7 @@ $$
 $$
 
 [fig4]  
-As we can see, $h_t$ is used in two paths: one going to the output of current time $t$, and the other going to the next hidden layer $h_{t+1}$. When we calculate the gradient, we must keep this in mind. The transpose to the matrices have been done to match the dimensions. Note that at the first iteration, $\frac{\partial L}{\partial z_{t+1}}$ is a zero vector with a dimension of $h \mathsf{x} 1$.
+As we can see, $h_t$ is used in two paths: one going to the output of current time $t$, and the other going to the next hidden layer $h_{t+1}$. When we calculate the gradient, we must keep this in mind. The transpose to the matrices have been done to match the dimensions. Note that at the first iteration, $\frac{\partial L}{\partial z_{t+1}}$ is a zero vector with a dimension of $h \times 1$.
 
 $$
 \begin{aligned}
@@ -68,7 +68,7 @@ $$
 \end{aligned}
 $$
 
-Apart from the high learning cost due to the sequentiality of the network, vanishing and exploding gradient problems are key problems with RNNs. And these problems inflict damage upon the network by backpropagating improper gradient. Thus the network cannot "remember" information from distant nodes, acting as if the network has short-term memory. Although we can try to solve these problems by changing some functions ($tanh$ is more often used as the sigmoid function), it still doesn't fix the root cause.  
+Apart from the high learning cost due to the sequentiality of the network, vanishing and exploding gradient problems are key problems with RNNs. And these problems inflict damage upon the network by backpropagating improper gradients. Thus the network cannot "remember" information from distant nodes, acting as if the network has short-term memory. Although we can try to solve these problems by changing some functions ($\tanh$ is more often used as the sigmoid function), it still doesn't fix the root cause.  
 
 ### 2. LSTM
 ![Fig05: LSTM]({{site.baseurl}}/assets/images/260404_Fig05.png)  
@@ -122,4 +122,34 @@ $$
 We set the threshold to the L2 norm of the gradient $g$, and if the L2 norm exceedes the threshold, the size of the gradient will be reduced to one. Although we resize the gradient, the direction isn't changed. There are some ways that also changes the direction, but it is less commonly used.  
 
 ### 3. Seq2Seq
-Finally, we are armed with background knowledge, ready to dive into the world of Seq2Seq.
+We are now armed with background knowledge, ready to dive into the world of Seq2Seq. We first look into the deep RNN structure which the authors used, proposed in *Generating Sequences With Recurrent Neural Networks*(Graves, 2014).
+
+![Fig06: Deep LSTM]({{site.baseurl}}/assets/images/260404_Fig06.jpg)  
+This structure is basically the vertically stacked version of LSTM.
+
+$$
+\begin{aligned}
+h^{t}_1 &= \mathcal{H}\left(W^{h^{1}i}x_t  + W^{h^{1}h^{1}}h^{1}_{t-1} + b^{1}_h\right) \\\\
+h^{t}_n &= \mathcal{H}\left(W^{h^{n}i}x_t + W^{h^{n}h^{n-1}}h^{n-1}_t + W^{h^{n}h^{n}}h^{n}_{t-1} + b^{n}_h\right) \\\\
+\hat{y}_t &= b_y + \sum_{n=1}^N W^{yh^{n}}h^{n}t \\\\
+\end{aligned}
+$$
+
+$\mathcal{H}$ is the hidden layer function which can include the whole LSTM architecture. There can be cell states at each layer, though the cell states don't send their data to other layers, unlike hidden states. The $n$-th layer of $h_t$ uses the input, $h_t$ of the $n-1$-th layer, $h_{t-1}$ of the $n$-th layer and the bias. The hidden states can store more detailed information as the layer deepens, like in Convolutional Neural Networks (CNNs). Like we see, the structure itself hasn't changed much. Also, note the "skip connections" where all the hidden states are wired so that the gradient can be calculated as the weights.
+Finally, we are going to look at the details of the **"Sequence-to-Sequence"** architecture.
+
+$$
+\begin{aligned}
+p(y_1, \cdots, y_{T'} \vert x_1,\cdots,x_{T}) = p(y_1 \vert v) \times p(y_2 \vert v, y_1) \times \cdots \times p(y_T' \vert v, y_1,\cdots,y_{T'-1}) = \prod_{t=1}^{T'} p(y_t \vert v, y_1,\cdots,y_{t-1})
+\end{aligned}
+$$
+
+The conditional probability above is the main goal of which the LSTM has to estimate. The input sequence is represented by $(x_1,\cdots,x_{T})$ and $(y_1,\cdots,y_{T'})$ as the output sequence. Two LSTMs are used for this structure; **"encoder"* for the intput, the **"decoder"** for the output. The vector $v$ is a fixed-dimensional representation of the input sequence, and is given by the last hidden state of the encoder. And the decoder computes which word should be in the specific place of the sentence conditioned by the input sequence $v$, and the output sequence computed so far.
+
+So how do we actually train this model? We've done a lot of math for training, but what happens in practice? First, we need to transform the source sentence into numbers that the network can understand. It is done using a vocabulary and an embedding matrix. For example, the authors experimented translation of English to French (WMT’14 dataset) using a fixed vocabulary each composed of 160,000 and 80,000 most used words for the source and target languages. The embedding matrix linearly projects each input word into a dense vector, where it becomes $x_t$ in the equation.
+Then, we do the process of updating the cell states and hidden state all the way to the end. And when forward propagation is finished in the encoder, the vector $v$ pops out as the last hidden state. This $v$ is then sent to the start of the decoder to become the first initializing hidden state. Going slightly off the point as it is not mentioned in the paper itself, we can use another special token <SOS> meaning start of sentence, which is to be the first input of the decoder. The training set for the decoder; the perfectly translated sentence, becomes the input to the decoder word by word. As we've mentioned earlier, the decoder needs information about the words before the current time slot. The perfectly translated sentence becomes the ground truth for training, and for this reason it is called teacher forcing. The information of words before time ${t-1}$ is saved in the hidden and cell states, so no need to give the input all the past words every time.
+At each $t$, we do the same process of updating cell states and hidden states again, but this time we need an output $`\hat{y}_t`$ which is calculated like this: $`\hat{y}_t = \text{softmax}(Wh_t + b)`$ . The hidden state(s) now stores the information of which word might come next, so we first linearly project it to the vocabulary and use the softmax function to retrieve the probability. And also we calculate the loss using the cross-entropy (MLE to be exact).
+All of this ends at <EOS>, a special token indicating the end of sentence. This symbol allows the model to define a distribution over sequences of all possible lengths, overcoming the fixed-size problem. Lastly, we now calculate the total loss by summing up all the losses, and backpropagate to update the parameters.  
+For inferencing, we calculate $\hat{T} = \argmax_{T} p(T \vert S)$, where $S$ is the given source sentence and $T$ is the target sentence and $\hat{T}$ is the most likely target sentence chosen from the set of $T$. To find the most likely target sentence, the authors used beam search on the probabilities derived from the hidden state. The partial hypothesis is told to be the prefix of some translation, and at each timestep the partial hypothesis is extended to the whole vocabulary. Beam search only maintains a "beam" a size of $B$ containing the most likely partial hypotheses and discards the rest. If the <EOS> comes in to the partial hypothesis, it is removed from the beam to be added to the set of complete hypotheses. The authors said a beam of size 2 provided most of the benefits of beam search.  
+Another thing we have to go over is that the input sentence was put into the LSTM in reverse order. The paper indicates the LSTM’s test perplexity dropped and test BLEU scores increased. By reversing the input sentence, more short-term dependecies were introduced. That is, less time and steps were consumed in calculating the first few words which induced higher accuracy and speed and less loss in going down the network.
+Training was done using LSTMs with four layers, SGD with no momentum and used gradient norm clipping. The authors pointed out that it is the first time that a pure neural translation system outperformed a phrase-based SMT baseline on a large scale Machine Translation (MT) task. The LSTM did well on long sentences but as the vector $v$, being called the "context vector" nowadays, is a fixed size vector. It means that in very long sequences, the capability of saving all the information about the input sequence might falter. This introduced the mechanism of "attention" in future studies.
