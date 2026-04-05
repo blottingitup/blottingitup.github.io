@@ -71,7 +71,7 @@ $$
 Apart from the high learning cost due to the sequentiality of the network, vanishing and exploding gradient problems are key problems with RNNs. Exploding gradients destabilize the network during training by backpropagating improper gradients. Vanishing gradients makes the network unable to "remember" information from distant nodes, acting as if the network has short-term memory. Although we can try to solve these problems by changing some functions ($\tanh$ is more often used as the sigmoid function), it still doesn't fix the root cause.  
 
 ### 2. LSTM
-![Fig05: LSTM]({{site.baseurl}}/assets/images/260404_Fig04.png)  
+![Fig04: LSTM]({{site.baseurl}}/assets/images/260404_Fig04.png)  
 Now it's the LSTM, which has three "gates" which uses something called a "cell state" which is a sort of long-term memory. In contrast, the hidden state can be said to be short-term memory. The cell state and hidden state are both propagated to the next cell. Some extra calculations are required before obtaining $\hat{y}_t$.
 
 $$
