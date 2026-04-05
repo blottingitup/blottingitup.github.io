@@ -4,7 +4,7 @@ categories:
   - PAPER
 ---
 
-**Deep Neural Networks (DNNs)** have shown their flexibility and power through achieving excellent performance on problems such as speech recognition and visual object recognition. However, they have a limitation: they cannot be applied to problems that use sequences whose lengths are not known a-priori. To solve sequence problems, *Sequence to Sequence Learning with Neural Networks*(Sutskever et al., 2014) proposes the use of **Long Short-Term Memory (LSTM)** architecture. It consists of two components: one for reading the input, and the other for generating the output based on the input sequence.  
+**Deep Neural Networks (DNNs)** have shown their flexibility and power through achieving excellent performance on problems such as speech recognition and visual object recognition. However, they have a limitation: they cannot be applied to problems that use sequences whose lengths are not known a-priori. To solve sequence problems, *Sequence to Sequence Learning with Neural Networks* (Sutskever et al., 2014) proposes the use of **Long Short-Term Memory (LSTM)** architecture. It consists of two components: one for reading the input, and the other for generating the output based on the input sequence.  
 ![Fig01: Simple Seq2Seq]({{site.baseurl}}/assets/images/260404_Fig01.jpg)  
 
 Before reading on, we need some background on the **Recurrent Neural Network (RNN)** and LSTM. Let's look first at the RNN.  
@@ -125,7 +125,7 @@ $$
 We set the threshold to the L2 norm of the gradient $g$, and if the L2 norm exceedes the threshold, the size of the gradient will be reduced to one. Although we resize the gradient, the direction isn't changed. There are some ways that also changes the direction, but it is less commonly used.  
 
 ### 3. Seq2Seq
-We are now armed with background knowledge, ready to dive into the world of Seq2Seq. We first look into the deep RNN structure which the authors used, proposed in *Generating Sequences With Recurrent Neural Networks*(Graves, 2014).
+We are now armed with background knowledge, ready to dive into the world of Seq2Seq. We first look into the deep RNN structure which the authors used, proposed in *Generating Sequences With Recurrent Neural Networks* (Graves, 2014).
 
 ![Fig05: Deep LSTM]({{site.baseurl}}/assets/images/260404_Fig05.jpg)  
 This structure is basically the vertically stacked version of LSTM.
